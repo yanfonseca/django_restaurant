@@ -4,3 +4,6 @@ from django.shortcuts import render
 
 def home(request):
     return render(request,'index.html')
+
+def receita(request):
+    return render(request, 'receita.html')
