@@ -5,7 +5,7 @@ from .models import Recipe
 
 
 class ListRecipe(admin.ModelAdmin):
-    list_display = ('id', 'name', 'category', 'preparation_time')
+    list_display = ('id', 'name', 'category', 'preparation_time', 'publish')
 
     list_display_links = ('id', 'name')
 
@@ -14,6 +14,8 @@ class ListRecipe(admin.ModelAdmin):
     list_filter = ('category',)
 
     list_per_page = 2
+
+    list_editable = ('publish',)
 
 
 admin.site.register(Recipe, ListRecipe)
