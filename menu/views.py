@@ -3,7 +3,9 @@ from .models import Recipe
 
 def home(request):
 
-    recipes = Recipe.objects.all()
+    # recipes = Recipe.objects.all()
+    
+    recipes = Recipe.objects.filter(publish=True)
     context = {
         'recipes': recipes
     }

@@ -19,4 +19,4 @@ class Recipe(models.Model):
     category = models.CharField(max_length=100)
     created_at = models.DateField(default=datetime.now, blank=True)
 
-
+    publish = models.BooleanField(default=False)
