@@ -9,5 +9,11 @@ class ListRecipe(admin.ModelAdmin):
 
     list_display_links = ('id', 'name')
 
+    search_fields = ('name',)
+
+    list_filter = ('category',)
+
+    list_per_page = 2
+
 
 admin.site.register(Recipe, ListRecipe)
