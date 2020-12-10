@@ -20,3 +20,5 @@ class Recipe(models.Model):
     created_at = models.DateField(default=datetime.now, blank=True)
 
     publish = models.BooleanField(default=False)
+
+    photo_recipe = models.ImageField(upload_to='photos/%d/%m/%Y/', blank=True)
