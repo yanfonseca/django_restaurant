@@ -5,7 +5,7 @@ def home(request):
 
     # recipes = Recipe.objects.all()
     
-    recipes = Recipe.objects.filter(publish=True)
+    recipes = Recipe.objects.order_by('-created_at').filter(publish=True)
     context = {
         'recipes': recipes
     }
