@@ -22,3 +22,7 @@ class Recipe(models.Model):
     publish = models.BooleanField(default=False)
 
     photo_recipe = models.ImageField(upload_to='photos/%d/%m/%Y/', blank=True)
+
+
+    def __str__(self):
+        return self.name

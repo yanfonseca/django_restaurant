@@ -5,29 +5,16 @@
 
 
 {% block content %}
-{% include 'partials/menu.html' %}
+{% include 'partials/_menu.html' %}
     <!-- Preloader -->
     <div id="preloader">
         <i class="circle-preloader"></i>
         <img src="{% static 'img/core-img/pizza.png' %}" alt="">
     </div>
 
-    <!-- Search Wrapper -->
-    <div class="search-wrapper">
-        <!-- Close Btn -->
-        <div class="close-btn"><i class="fa fa-times" aria-hidden="true"></i></div>
+    {% include 'partials/_search.html' %}
 
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <form action="{% url 'search' %}" method="GET">
-                        <input type="text" name="xxsearch" placeholder="O que está procurando...">
-                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
 
     <!-- ##### Best Receipe Area Start ##### -->
@@ -62,5 +49,5 @@
     <!-- ##### Best Receipe Area End ##### -->
 
     
-    {% include 'partials/footer.html' %}
+    {% include 'partials/_footer.html' %}
 {% endblock content %}
