@@ -1,6 +1,10 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from .models import Recipe
 
+def search(request):
+    return render(request, 'buscar.html')
+
+
 def home(request):
 
     # recipes = Recipe.objects.all()

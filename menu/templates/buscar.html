@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+
+{% block content %}
+{% include 'partials/menu.html' %}
+    <!-- Preloader -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+        <img src="{% static 'img/core-img/pizza.png' %}" alt="">
+    </div>
+
+    <!-- Search Wrapper -->
+    <div class="search-wrapper">
+        <!-- Close Btn -->
+        <div class="close-btn"><i class="fa fa-times" aria-hidden="true"></i></div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <form action="{% url 'search' %}">
+                        <input type="text" name="xxsearch" placeholder="O que está procurando...">
+                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ##### Best Receipe Area Start ##### -->
+    <section class="best-receipe-area">
+        <div class="container">
+            <div class="row">
+
+                {% if recipes %}
+                {% for recipe in recipes %}
+                <!-- Single Best Receipe Area -->
+                <div class="col-12 col-sm-6 col-lg-4">
+
+                    <div class="single-best-receipe-area mb-30">
+                        {% if not recipe.photo_recipe%}
+                        <img src="{% static 'img/bg-img/foto_receita.png' %}" alt="">
+                        {% else %}
+                        <img src="{{recipe.photo_recipe.url}}" alt="">
+                        {% endif %}
+                        <div class="receipe-content">
+                            <a href="{% url 'receita' recipe.id %}">
+                                <h5>{{recipe.name}}</h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <p>Não encontrado</p>
+                </div>
+
+                {% endif %}
+ 
+            </div>
+        </div>
+    </section>
+    <!-- ##### Best Receipe Area End ##### -->
+
+    
+    {% include 'partials/footer.html' %}
+{% endblock content %}
