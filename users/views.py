@@ -4,17 +4,17 @@ from django.shortcuts import render
 
 
 def subscribe(request):
-    pass
+    return render(request, 'usuarios/cadastro.html') 
 
 
 def login(request):
-    pass
+    return render(request, 'usuarios/login.html')
 
 
 def dashboard(request):
     pass
 
 
-def lougout(request):
+def logout(request):
     pass
 
