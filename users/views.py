@@ -13,7 +13,8 @@ def subscribe(request):
         senha2 = request.POST['password2']
 
         print(nome, email, senha, senha2)
-        print(request)
+        print('request', request)
+        print(request.headers)
 
         print('deu certo')
         return redirect('login')
