@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 
+from django.contrib.auth.models import User
+
 # Create your views here.
 
 
@@ -16,7 +18,27 @@ def subscribe(request):
         print('request', request)
         print(request.headers)
 
-        print('deu certo')
+        if not nome.strip():
+            print('Escreva um nome valido')
+            return redirect('cadastro')
+
+        if not email.strip():
+            print('Escreva um email valido')
+            return redirect('cadastro')
+        
+        if senha != senha2:
+            print('Senhas diferentes')
+            return redirect('cadastro')
+
+        if User.objects.filter(email=email).exists():
+            print('Usuario já foi cadastrado anteriormente.')
+            return redirect('cadastro')
+
+        user = User.objects.create_user(username=nome, email=email, password=senha)
+        user.save()
+        
+
+        print('Usuário cadastrado com sucesso')
         return redirect('login')
 
     else:
