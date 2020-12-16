@@ -2,12 +2,14 @@ from django.db import models
 from datetime import datetime
 # Create your models here.
 
-from people.models import PeopleModel
+# from people.models import PeopleModel
+
+from django.contrib.auth.models import User
 
 class Recipe(models.Model):
 
     person = models.ForeignKey(
-        PeopleModel, 
+        User,
         on_delete=models.CASCADE,
         default='')
 
