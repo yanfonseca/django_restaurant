@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from django.contrib.auth.models import User
 
-from django.contrib import auth
+from django.contrib import auth, messages
 # Create your views here.
 
 from menu.models import Recipe
@@ -26,21 +26,30 @@ def subscribe(request):
             return redirect('cadastro')
 
         if not email.strip():
+
             print('Escreva um email valido')
             return redirect('cadastro')
         
         if senha != senha2:
+            messages.error(request, 'As senhas não são iguais.')
             print('Senhas diferentes')
             return redirect('cadastro')
 
         if User.objects.filter(email=email).exists():
+            messages.error(request, 'email ja cadastrado')
             print('Usuario já foi cadastrado anteriormente.')
+            return redirect('cadastro')
+
+        if User.objects.filter(username=nome).exists():
+            print('Usuario já foi cadastrado anteriormente.')
+            messages.error(request, 'Cadastro realizado com sucesso')
             return redirect('cadastro')
 
         user = User.objects.create_user(username=nome, email=email, password=senha)
         user.save()
-        
 
+
+        messages.success(request, 'Cadastro realizado com sucesso')
         print('Usuário cadastrado com sucesso')
         return redirect('login')
 
