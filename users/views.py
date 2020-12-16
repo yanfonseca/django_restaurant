@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from django.contrib.auth.models import User
 
 from django.contrib import auth
 # Create your views here.
+
+from menu.models import Recipe
 
 
 def subscribe(request):
@@ -70,10 +72,20 @@ def login(request):
 
 
 def dashboard(request):
-
+    print('############')
     if request.user.is_authenticated:
-        return render(request, 'usuarios/dashboard.html')
-    return redirect('home')
+        print('aaaaaaaaaaaaaaa')
+
+        receitas = Recipe.objects.order_by('-created_at').filter(person=request.user.id)
+
+        context = {
+            'recipes':receitas
+        }
+
+        return render(request, 'usuarios/dashboard.html', context)
+    else:
+        print('############')
+        return redirect('home')
 
 
 def logout(request):
@@ -91,12 +103,24 @@ def cria_receita(request):
         categoria = request.POST['categoria']
         foto_receita = request.FILES['foto_receita']
 
-        print(nome_receita,
+        user = get_object_or_404(User, pk=request.user.id)
+        print(user, nome_receita,
               ingredientes,
               modo_preparo,
               tempo_preparo,
               rendimento,
               categoria,
               foto_receita)
+        receita = Recipe.objects.create(person=user,
+                                        name=nome_receita,
+                                        ingredient=ingredientes,
+                                        preparation=modo_preparo,
+                                        preparation_time=tempo_preparo,
+                                        portions=rendimento,
+                                        category = categoria,
+                                        photo_recipe=foto_receita )
 
-    return render(request, 'usuarios/cria_receita.html')
+        receita.save()
+        return redirect('dashboard')
+    else:
+        return render(request, 'usuarios/cria_receita.html')
